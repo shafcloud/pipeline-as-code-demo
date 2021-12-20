@@ -1,11 +1,7 @@
 
 pipeline {
 
-    agent {
-        node {
-            label 'SLAVE01'
-        }
-    }
+    agent any
 
     tools { 
         maven 'maven3' 
@@ -19,8 +15,8 @@ pipeline {
     }
 
     environment {
-        APP_NAME = "DCUBE_APP"
-        APP_ENV  = "DEV"
+        APP_NAME = 'DCUBE_APP'
+        APP_ENV  = 'DEV'
     }
 
     stages {
@@ -38,7 +34,7 @@ pipeline {
             steps {
                 checkout([
                     $class: 'GitSCM', 
-                    branches: [[name: '*/master']], 
+                    branches: [[name: '*/main']], 
                     userRemoteConfigs: [[url: 'https://github.com/spring-projects/spring-petclinic.git']]
                 ])
             }
@@ -50,7 +46,7 @@ pipeline {
             }
         }
 
-        stage('Priting All Global Variables') {
+        stage('Printing All Global Variables') {
             steps {
                 sh """
                 env
